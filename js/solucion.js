@@ -42457,9 +42457,7 @@ let datos = [{
 }]
 
 //lista de estudiantes [nombre, genero, grado, asignatura, corte]
-
 /* cantidad de estudiantes en el colegio.*/
-
 let datosTemp = datos[0].colegio;
 
 function estudiantesTotal() {
@@ -42490,4 +42488,44 @@ function estudiantesTotalCurso(datos, curso) {
 console.log(`Cantidad de estudiantes que hay en el nivel de primeria = ` + estudiantesTotalCurso(datos, 'primaria'));
 console.log(`Cantidad de estudiantes que hay en el nivel de secundaria = ` + estudiantesTotalCurso(datos, 'secundaria'));
 
-/* Cantidad de estudiantes por genero
+/*La cantidad de estuiante hombres y mujeres en el colegio.*/
+
+function generoEstudiantes(datos, genero) {
+    let totalMale = 0;
+    let totalFemale = 0;
+    if (genero == 'male') {
+        for (let curso in datosTemp) {
+            let datosCurso = datosTemp[curso][0];
+            for (let grado in datosCurso) {
+                for (let asignatura in datosCurso[grado]) {
+                    let datosAsignatura = datosCurso[grado][asignatura];
+                    for (let estudiantes in datosAsignatura.estudiantes) {
+                        let gender = datosAsignatura.estudiantes[estudiantes].genero
+                        if (gender == 'male') {
+                            totalMale++;
+                        }
+                    }
+                }
+            }
+        }
+        return totalMale;
+    } else {
+        for (let curso in datosTemp) {
+            let datosCurso = datosTemp[curso][0];
+            for (let grado in datosCurso) {
+                for (let asignatura in datosCurso[grado]) {
+                    let datosAsignatura = datosCurso[grado][asignatura];
+                    for (let estudiantes in datosAsignatura.estudiantes) {
+                        let gender = datosAsignatura.estudiantes[estudiantes].genero
+                        if (gender == 'female') {
+                            totalFemale++;
+                        }
+                    }
+                }
+            }
+        }
+        return totalFemale;
+    }
+}
+console.log(`Cantidad de estudiantes Hombres = ` + generoEstudiantes(datos, 'male'));
+console.log(`Cantidad de estudiantes Mujeres = ` + generoEstudiantes(datos, 'female'));
